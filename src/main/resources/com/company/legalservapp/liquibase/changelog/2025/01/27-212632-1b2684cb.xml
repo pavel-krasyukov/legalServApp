@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd" objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="legalServApp">
+        <createTable tableName="CASE_">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CASE_"/>
+            </column>
+            <column name="CASE_DATE" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CASE_NUM" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CASE_CUSTOMER_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="${offsetDateTime.type}"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="${offsetDateTime.type}"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="legalServApp">
+        <createTable tableName="CASE_DEFENDANTS">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CASE_DEFENDANTS"/>
+            </column>
+            <column name="CASE_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CUSTOMER_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="${offsetDateTime.type}"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="${offsetDateTime.type}"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="legalServApp">
+        <createTable tableName="CASE_PLAINTIFFS">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CASE_PLAINTIFFS"/>
+            </column>
+            <column name="CASE_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CUSTOMER_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="${offsetDateTime.type}"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="${offsetDateTime.type}"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="4" author="legalServApp">
+        <createTable tableName="CASE_STATUSES">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CASE_STATUSES"/>
+            </column>
+            <column name="CASE_STATUS_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CASE_STATUS_PARENT_ID" type="UUID"/>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="${offsetDateTime.type}"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="${offsetDateTime.type}"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="5" author="legalServApp">
+        <createTable tableName="CASE_THIRD_PARTIES">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CASE_THIRD_PARTIES"/>
+            </column>
+            <column name="CASE__ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CUSTOMER_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="${offsetDateTime.type}"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="${offsetDateTime.type}"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="6" author="legalServApp">
+        <createTable tableName="CASE_TYPES">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CASE_TYPES"/>
+            </column>
+            <column name="CASE_TYPE_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="${offsetDateTime.type}"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="${offsetDateTime.type}"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="7" author="legalServApp">
+        <createTable tableName="CUSTOMER">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CUSTOMER"/>
+            </column>
+            <column name="CUSTOMER_TYPE_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CUSTOMER_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CUSTOMER_INN" type="INT"/>
+            <column name="CUSTOMER_OGRN" type="INT"/>
+            <column name="CUSTOMER_EMAIL" type="VARCHAR(255)"/>
+            <column name="CUSTOMER_ADDRESS_FACT" type="VARCHAR(255)"/>
+            <column name="CUSTOMER_ADDRESS_URID" type="VARCHAR(255)"/>
+            <column name="CUSTOMER_PHONE_NUM" type="VARCHAR(255)"/>
+            <column name="CUSTOMER_CONTACT_PERSON" type="CLOB"/>
+            <column name="CUSTOMER_NOTE" type="CLOB"/>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="${offsetDateTime.type}"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="${offsetDateTime.type}"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="8" author="legalServApp">
+        <createTable tableName="CUSTOMER_TYPES">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CUSTOMER_TYPES"/>
+            </column>
+            <column name="CUSTOMER_TYPE_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="${offsetDateTime.type}"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="${offsetDateTime.type}"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="9" author="legalServApp">
+        <createIndex indexName="IDX_CASE_DEFENDANTS_CASE_ID" tableName="CASE_DEFENDANTS">
+            <column name="CASE_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="CASE_ID" baseTableName="CASE_DEFENDANTS" constraintName="FK_CASE_DEFENDANTS_ON_CASE"
+                                 referencedColumnNames="ID" referencedTableName="CASE_"/>
+    </changeSet>
+    <changeSet id="10" author="legalServApp">
+        <createIndex indexName="IDX_CASE_DEFENDANTS_CUSTOMER_ID" tableName="CASE_DEFENDANTS">
+            <column name="CUSTOMER_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="CUSTOMER_ID" baseTableName="CASE_DEFENDANTS"
+                                 constraintName="FK_CASE_DEFENDANTS_ON_CUSTOMER" referencedColumnNames="ID" referencedTableName="CUSTOMER"/>
+    </changeSet>
+    <changeSet id="11" author="legalServApp">
+        <createIndex indexName="IDX_CASE_DEFENDANTS_LINK_UNQ" tableName="CASE_DEFENDANTS" unique="true">
+            <column name="CASE_ID"/>
+            <column name="CUSTOMER_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="12" author="legalServApp">
+        <createIndex indexName="IDX_CASE_PLAINTIFFS_CASE_" tableName="CASE_PLAINTIFFS">
+            <column name="CASE_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="CASE_ID" baseTableName="CASE_PLAINTIFFS" constraintName="FK_CASE_PLAINTIFFS_ON_CASE"
+                                 onDelete="CASCADE" referencedColumnNames="ID" referencedTableName="CASE_"/>
+    </changeSet>
+    <changeSet id="13" author="legalServApp">
+        <createIndex indexName="IDX_CASE_PLAINTIFFS_CUSTOMER" tableName="CASE_PLAINTIFFS">
+            <column name="CUSTOMER_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="CUSTOMER_ID" baseTableName="CASE_PLAINTIFFS"
+                                 constraintName="FK_CASE_PLAINTIFFS_ON_CUSTOMER" onDelete="CASCADE" referencedColumnNames="ID"
+                                 referencedTableName="CUSTOMER"/>
+    </changeSet>
+    <changeSet id="14" author="legalServApp">
+        <createIndex indexName="IDX_CASE_PLAINTIFFS_LINK_UNQ" tableName="CASE_PLAINTIFFS" unique="true">
+            <column name="CASE_ID"/>
+            <column name="CUSTOMER_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="15" author="legalServApp">
+        <createIndex indexName="IDX_CASE_STATUSES_CASE_STATUS_PARENT" tableName="CASE_STATUSES">
+            <column name="CASE_STATUS_PARENT_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="CASE_STATUS_PARENT_ID" baseTableName="CASE_STATUSES"
+                                 constraintName="FK_CASE_STATUSES_ON_CASE_STATUS_PARENT" referencedColumnNames="ID"
+                                 referencedTableName="CASE_STATUSES"/>
+    </changeSet>
+    <changeSet id="16" author="legalServApp">
+        <createIndex indexName="IDX_CASE_THIRD_PARTIES_CASE_" tableName="CASE_THIRD_PARTIES">
+            <column name="CASE__ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="CASE__ID" baseTableName="CASE_THIRD_PARTIES"
+                                 constraintName="FK_CASE_THIRD_PARTIES_ON_CASE_" referencedColumnNames="ID" referencedTableName="CASE_"/>
+    </changeSet>
+    <changeSet id="17" author="legalServApp">
+        <createIndex indexName="IDX_CASE_THIRD_PARTIES_CUSTOMER" tableName="CASE_THIRD_PARTIES">
+            <column name="CUSTOMER_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="CUSTOMER_ID" baseTableName="CASE_THIRD_PARTIES"
+                                 constraintName="FK_CASE_THIRD_PARTIES_ON_CUSTOMER" referencedColumnNames="ID"
+                                 referencedTableName="CUSTOMER"/>
+    </changeSet>
+    <changeSet id="18" author="legalServApp">
+        <createIndex indexName="IDX_CASE__CASE_CUSTOMER" tableName="CASE_">
+            <column name="CASE_CUSTOMER_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="CASE_CUSTOMER_ID" baseTableName="CASE_" constraintName="FK_CASE__ON_CASE_CUSTOMER"
+                                 referencedColumnNames="ID" referencedTableName="CUSTOMER"/>
+    </changeSet>
+    <changeSet id="19" author="legalServApp">
+        <createIndex indexName="IDX_CUSTOMER_CUSTOMER_TYPE" tableName="CUSTOMER">
+            <column name="CUSTOMER_TYPE_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="CUSTOMER_TYPE_ID" baseTableName="CUSTOMER" constraintName="FK_CUSTOMER_ON_CUSTOMER_TYPE"
+                                 referencedColumnNames="ID" referencedTableName="CUSTOMER_TYPES"/>
+    </changeSet>
+</databaseChangeLog>

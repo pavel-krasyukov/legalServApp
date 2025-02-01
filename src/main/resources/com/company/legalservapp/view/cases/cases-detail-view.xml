@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://casesDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="casesDc"
+                  class="com.company.legalservapp.entity.Cases">
+            <fetchPlan extends="_base">
+                <property name="plaintiffs" fetchPlan="_base">
+                    <property name="case_" fetchPlan="_instance_name"/>
+                    <property name="customer" fetchPlan="_instance_name"/>
+                </property>
+                <property name="defendant" fetchPlan="_base">
+                    <property name="caseId" fetchPlan="_instance_name"/>
+                    <property name="customerId" fetchPlan="_instance_name"/>
+                </property>
+                <property name="caseCustomer" fetchPlan="_instance_name"/>
+                <property name="caseType" fetchPlan="_base"/>
+                <property name="executor" fetchPlan="_instance_name"/>
+                <property name="caseStatus" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="caseLoader"/>
+            <collection id="plaintiffsDc" property="plaintiffs"/>
+            <collection id="defendantDc" property="defendant"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="casesDc">
+            <datePicker id="caseDateField" property="caseDate"/>
+            <textField id="caseNumField" property="caseNum"/>
+            <entityPicker id="caseCustomerField" property="caseCustomer">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <entityPicker id="caseTypeField" property="caseType">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <textField id="caseSumField" property="caseSum"/>
+            <entityPicker id="executorField" property="executor">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <datePicker id="dueDateField" property="dueDate"/>
+            <entityPicker id="caseStatusField" property="caseStatus">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <textArea id="caseEssenceField" height="9.5em" property="caseEssence"/>
+            <textArea id="caseNoteField" height="9.5em" property="caseNote"/>
+        </formLayout>
+        <tabSheet maxWidth="100%" width="100%">
+            <tab id="tbPlaintiffs" ariaLabel="msg://tbPlaintiffs.ariaLabel" label="msg://tbPlaintiffs.label">
+                <details opened="true">
+                    <hbox>
+                        <button action="plaintiffsDataGrid.createPlantiffsCustom"/>
+                        <button action="plaintiffsDataGrid.create" visible="false"/>
+                        <button action="plaintiffsDataGrid.edit"/>
+                        <button action="plaintiffsDataGrid.remove"/>
+                    </hbox>
+                    <dataGrid id="plaintiffsDataGrid" dataContainer="plaintiffsDc" width="100%" minHeight="20em">
+                        <columns>
+                            <column property="case_"/>
+                            <column property="customer"/>
+                        </columns>
+                        <actions>
+                            <action id="create" type="list_create"/>
+                            <action id="edit" type="list_edit"/>
+                            <action id="remove" type="list_remove"/>
+                            <action id="createPlantiffsCustom" icon="lumo:plus" text="Создать"/>
+                            <action id="refresh" type="list_refresh"/>
+                        </actions>
+                    </dataGrid>
+                </details>
+            </tab>
+            <tab id="tbDefendants" ariaLabel="msg://tbDefendants.ariaLabel" label="msg://tbDefendants.label">
+                <details opened="true">
+                    <hbox>
+                        <button action="defendantDataGrid.create"/>
+                        <button action="defendantDataGrid.edit"/>
+                        <button action="defendantDataGrid.remove"/>
+                    </hbox>
+                    <dataGrid id="defendantDataGrid" dataContainer="defendantDc" width="100%" minHeight="20em">
+                        <columns>
+                            <column property="caseId"/>
+                            <column property="customerId"/>
+                        </columns>
+                        <actions>
+                            <action id="create" type="list_create"/>
+                            <action id="edit" type="list_edit"/>
+                            <action id="remove" type="list_remove"/>
+                        </actions>
+                    </dataGrid>
+                </details>
+            </tab>
+        </tabSheet>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

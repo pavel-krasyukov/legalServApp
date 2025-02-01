@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://caseStatusesListView.title"
+      focusComponent="caseStatusesesDataGrid">
+    <data>
+        <collection id="caseStatusesesDc"
+                    class="com.company.legalservapp.entity.CaseStatuses">
+            <fetchPlan extends="_base">
+                <property name="caseStatusParent" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="caseStatusesesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from CaseStatuses e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="caseStatusesesDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createBtn" action="caseStatusesesDataGrid.create"/>
+            <button id="editBtn" action="caseStatusesesDataGrid.edit"/>
+            <button id="refreshBtn" action="caseStatusesesDataGrid.refresh"/>
+            <button id="removeBtn" action="caseStatusesesDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="caseStatusesesDl"/>
+        </hbox>
+        <treeDataGrid id="caseStatusesesDataGrid"
+                      width="100%"
+                      minHeight="20em"
+                      dataContainer="caseStatusesesDc"
+                      hierarchyProperty="caseStatusParent"
+                      columnReorderingAllowed="true">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="refresh" type="list_refresh"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns resizable="true">
+                <column property="caseStatusName"/>
+                <column property="caseStatusParent"/>
+            </columns>
+        </treeDataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectBtn" action="selectAction"/>
+            <button id="discardBtn" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>

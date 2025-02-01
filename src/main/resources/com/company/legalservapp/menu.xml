@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://jmix.io/schema/flowui/menu">
+
+    <menu id="application" title="msg://com.company.legalservapp/menu.application.title" opened="true">
+        <menu id="handbooks" title="Справочники" opened="false">
+            <item view="User.list" title="msg://com.company.legalservapp.view.user/UserListView.title"/>
+            <item view="CaseTypes.list" title="msg://com.company.legalservapp.view.casetypes/caseTypesListView.title"/>
+            <item view="CaseStatuses.list" title="msg://com.company.legalservapp.view.casestatuses/caseStatusesListView.title"/>
+            <item view="CustomerTypes.list" title="msg://com.company.legalservapp.view.customertypes/customerTypesListView.title"/>
+            <item view="Customer.list" title="msg://com.company.legalservapp.view.customer/customerListView.title"/>
+        </menu>
+        <item view="Case_.list" title="msg://com.company.legalservapp.view.case/caseListView.title"/>
+    </menu>
+
+</menu-config>
